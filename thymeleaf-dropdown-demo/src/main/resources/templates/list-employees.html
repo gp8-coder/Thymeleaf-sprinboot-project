@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="hhtps://www.thymeleaf.org">
+ <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+
+<head>
+	<title>Employee Directory</title>
+</head>
+
+<body>
+
+	<div class="container">
+	<h3>Employee Directory</h3>
+	
+	<hr>
+	
+	<!-- Add Button 
+	<a th:href="@{/employee/showFormForAdd}"
+		class="btn btn-primary btn-sm mb-3">
+	Add Employee
+	</a> -->
+	
+	 <form th:action="@{/employee/search}" class="form-inline">
+		<a th:href="@{/employee/showFormForAdd}"
+			class="btn btn-primary btn-sm mr-5 mb-3">
+			Add Employee
+		</a>
+
+		<input class="form-control  ml-5 mr-sm-2 mb-3" type="search" name="employeeName" placeholder="Search by name" />
+
+		<button class="btn btn-success mb-3" type="submit">Search</button>
+    </form>	
+    
+    
+	<!--<table border="1">  -->
+	<table class="table table-bordered table-striped">
+		<thead class="thead-dark">
+			<tr>
+				<th>FirstName</th>
+				<th>LastName</th>
+				<th>Email</th>
+				<div sec:authorize="hasAnyRole('ROLE_MANAGER', 'ROLE_ADMIN')">
+				<th>
+				Action
+				</th>
+				</div>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr th:each="temp : ${employees}">
+			<td th:text="${temp.firstName}"/>
+				<td th:text="${temp.lastName}"/>
+				<td th:text="${temp.email}"/>
+				
+				<div sec:authorize="hasAnyRole('ROLE_MANAGER', 'ROLE_ADMIN')">
+			 	<td>
+					<a th:href="@{/employee/showFormForUpdate(employeeId=${temp.id})}"
+						class="btn btn-info btn-sm">
+					Update
+					</a>
+				</td> 
+				</div>
+				<div sec:authorize="hasRole('ROLE_ADMIN')">  
+				<td>
+					<a th:href="@{/employee/delete(employeeId=${temp.id})}"
+						class="btn btn-danger btn-sm"
+						onclick="if(!(confirm('Are you sure?'))) return false">
+					Delete
+					</a>
+				</td> 
+				</div>
+				
+				<td>
+					<a th:href="@{/employeedetail/showEmployee(employeeId=${temp.id})}"
+						class="btn btn-info btn-sm">
+					Detail
+					</a>
+				</td> 
+			</tr>
+				
+		</tbody>
+		</table>
+		
+	<form action="#" th:action="@{/logout}" 
+			   method="POST">
+	
+		<input type="submit" value="Logout" class="btn btn-outline-primary mt-2" />
+	
+	</form>
+		</div>
+</body>
+
+
+
+
+
+
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="hhtps://www.thymeleaf.org">
+ <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+
+<head>
+	<title>Save Employee</title>
+</head>
+
+<body>
+	<div class="container">
+		<h3>Employee Directory</h3>
+		<hr>
+		
+		<p class="h4 mb-4">Save Employee</p>
+		
+		<form action="#" th:action="@{/employee/save}"
+							th:object="${employees}" method="POST">
+							
+				<input type="hidden" th:field="*{id}"/>
+				
+				<div class="form-group row">
+				<input type="text" th:field="*{firstName}"
+						class="form-control mb-4 col-4" placeholder="First Name"> 
+				<div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Invalid Name</div>
+				</div>
+				
+				
+				<div class="form-group row">
+				<input type="text" th:field="*{lastName}"
+						class="form-control mb-4 col-4" placeholder="Last Name">
+				<span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
+				</div>
+				
+				<div class="form-group row">		
+				<input type="text" th:field="*{email}"
+						class="form-control mb-4 col-4" placeholder="Email">
+				</div>
+									
+				
+				<button type="submit" class="btn btn-info col-2">Save</button>			
+		</form>
+	
+	<hr>
+	<a th:href="@{/employeedetail/insert-skill(employeeId=${employees.id})}">Add new skill</a>
+	<hr>
+	<a th:href="@{/employee/list}">Back to employee list</a>
+	
+	</div>
+</body>

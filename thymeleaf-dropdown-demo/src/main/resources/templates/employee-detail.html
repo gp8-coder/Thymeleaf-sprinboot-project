@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="hhtps://www.thymeleaf.org">
+ <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+
+<head>
+	<title>Employee Detail</title>
+</head>
+
+<body>
+	<div class="container">
+		<h3>Employee Detail</h3>
+		<hr>
+		
+		<p class="h4 mb-4">Skillset</p>
+		
+
+	Name: <b th:text="${employee.firstName}"></b> <b th:text="${employee.lastName}"></b><br/>
+	Skills:
+		<span th:each="skill : ${employee.detail}">
+			<br/>&nbsp;&nbsp;<span th:text="${skill.skills}"></span>
+		</span>
+		
+		
+<!--  	<form th:action="@{/developer/{id}/skills(id=${developer.id})}" method="post" enctype="multipart/form-data" >
+		<select name="skillId">
+			<option th:each="skill : ${skills}" 
+				th:value="${skill.id}" 
+				th:text="${skill.description}">Skill</option>
+		</select>
+		<input type="submit" value="Add skill"/>-->
+	</form>
+
+	
+	<hr>
+	<a th:href="@{/employee/list}">Back to employee list</a>
+	
+	</div>
+</body>
